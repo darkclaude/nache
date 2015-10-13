@@ -3,7 +3,7 @@ var User            = require('./app/models/user').User;
 
 var app = express();
 var app2 =  express();
-var port  = process.env.PORT || 2000;
+var port  = process.env.OPENSHIFT_NODEJS_PORT;
 var bcrypt = require('bcrypt');
 var bodyParser  = require('body-parser');
 var configDB = require('./config/database.js');
@@ -109,7 +109,7 @@ require('./app/api.js')(api, passport);
 // 	console.log('==========');
 // 	console.log(req.session);
 // });
-app2.listen(port);
+app2.listen(port, process.env.OPENSHIFT_NODEJS_IP);
 
 //console.log('Server @ = '+port);
  
