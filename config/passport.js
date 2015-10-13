@@ -21,16 +21,22 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        if(id=="5608a3404b59009036eef0fe"){
+        
            Admin.findById(id, function(err, user) {
+             if(user){
             done(err, user);
-        }); 
-        }
-        else{
-        User.findById(id, function(err, user) {
+}
+else{
+    User.findById(id, function(err, user) {
             done(err, user);
         });
-    }
+    
+}
+        }); 
+        
+        
+    
+    
       
     });
 
