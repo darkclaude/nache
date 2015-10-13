@@ -17,8 +17,16 @@ var jwt = require('jsonwebtoken');
 var flash = require('connect-flash');
 require('./config/passport')(passport);
 var st ="";
-mongoose.connect(configDB.url);
-admindb = mongoose.createConnection("mongodb://128.90.106.250:27017/admins");
+var connection_string = '127.0.0.1:27017/nodekeyz';
+// if OPENSHIFT env variables are present, use the available connection info:
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+  
+mongoose.connect("mongodb://"+connection_string+"/user");
+admindb = mongoose.createConnection("mongodb://"+connection_string+"/admins");
 
 app.use('/favicon.ico', express.static('views/favicon.ico'));
 app.use('/auth',express.static(__dirname + '/views'));
@@ -34,7 +42,7 @@ app.use(cookieParser());
 app.use(session({secret: 'anystringoftext',
 	            saveUninitialized: true,
 	            resave: true,
-	            store: new MongoStore({  url:'mongodb://128.90.106.250:27017/sessions'})
+	            store: new MongoStore({  url:"mongodb://"+connection_string+"/sessions"})
 	          }));
 
 
