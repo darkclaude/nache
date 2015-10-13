@@ -25,7 +25,7 @@ var connection_string = '127.0.0.1:27017/nodekeyz';
   process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
   process.env.OPENSHIFT_APP_NAME;
   
-mongoose.connect("mongodb://"+connection_string+"/user");
+mongoose.connect("mongodb://"+connection_string+"/nodekeyz");
 admindb = mongoose.createConnection("mongodb://"+connection_string+"/admins");
 
 app.use('/favicon.ico', express.static('views/favicon.ico'));
