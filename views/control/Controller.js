@@ -9,7 +9,7 @@ function AppCtrl($scope, $http, $window){
 		$scope.v = "!a";
 		    console.log("GOT IT BIT");
     $scope.contactlist = response;
-    $scope.contact="";
+    $scope.contact=response;
 
 	});
 };
@@ -20,7 +20,8 @@ var refresh2 = function(){
    
 
     $scope.contactlist = response;
-    $scope.contact="";
+    $scope.contact=response;
+    $scope.contact=response;
 
 	});
 };
@@ -29,6 +30,7 @@ var refresh2 = function(){
 console.log($scope.contact);
 $http.get('/apanel/data2').success(function(response){
 $scope.contact = response;
+$scope.contactlist = response;
 refresh2();
 
 });
@@ -37,6 +39,7 @@ refresh2();
 console.log($scope.contact);
 $http.get('/apanel/data').success(function(response){
 $scope.contact = response;
+$scope.contactlist = response;
 $scope.pgs = "!b";
 refresh();
 });
