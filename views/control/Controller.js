@@ -65,6 +65,7 @@ rf = $scope.lol;
 idedit = response._id;
 
 });
+refresh();
 
 };
 $scope.ma= function(id){
@@ -86,9 +87,10 @@ $http.get('/apanel/rv/'+ id).success(function(response){
 $scope.update = function(){
 	console.log(idedit);
 		$http.get('/apanel/updateuser/'+idedit+$scope.lol).success(function(response){
-refresh();
+
 $scope.lol="";
 	});
+	refresh();
 
 };
 $scope.deselect = function(){
